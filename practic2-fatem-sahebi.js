@@ -4,7 +4,7 @@ function Food(name, type, price, deliveryTime) {
     this.type = type;
     this.price = price;
     this.deliveryTime = deliveryTime;
-    this.totalFoodRate =0;
+    this.totalFoodRate =[];
     this.comments = [];
     this.isReady = false;
     this.order=function isPremiumUser(boolean){
@@ -12,8 +12,11 @@ function Food(name, type, price, deliveryTime) {
         else console.log(this.price,this.totalFoodRate)
     }
     this.rateFood=function SetRate(rateNum){
-            if (this.totalFoodRate===0) this.totalFoodRate=rateNum;
-            else this.totalFoodRate=(this.totalFoodRate+rateNum)/2
+        this.totalFoodRate.push(rateNum)
+            let sumRate=this.totalFoodRate.reduce((preVal,curVla)=>{
+                return preVal+curVla
+            })
+        return sumRate/(this.totalFoodRate.length)
         }
 }
 //----------------------------test constructor method---------------------------------
@@ -22,11 +25,12 @@ let pizza=new Food('pizza','fastfood',120,30)
 
 //-----------------------------add rate to food----------------------------------------
 let rate1=pizza.rateFood(5)
-// console.log(pizza.totalFoodRate)
+console.log(pizza.totalFoodRate)
 
 let rate2=pizza.rateFood(4)
-// console.log(pizza.totalFoodRate)
-// console.log(pizza)
+console.log(pizza.totalFoodRate)
+console.log(pizza)
+console.log(pizza.rateFood(5))
 
 // -------------------------------- test order ----------------------------
 // console.log(pizza.order(true))
