@@ -25,12 +25,12 @@ let pizza=new Food('pizza','fastfood',120,30)
 
 //-----------------------------add rate to food----------------------------------------
 let rate1=pizza.rateFood(5)
-console.log(pizza.totalFoodRate)
+// console.log(pizza.totalFoodRate)
 
 let rate2=pizza.rateFood(4)
-console.log(pizza.totalFoodRate)
-console.log(pizza)
-console.log(pizza.rateFood(5))
+// console.log(pizza.totalFoodRate)
+// console.log(pizza)
+// console.log(pizza.rateFood(5))
 
 // -------------------------------- test order ----------------------------
 // console.log(pizza.order(true))
@@ -44,7 +44,7 @@ function food(name, type, price, deliveryTime,order) {
         type,
         price,
         deliveryTime,
-        totalFoodRate:0,
+        totalFoodRate:[],
         comments: [],
         isReady: false,
         order:function isPremiumUser(True){
@@ -52,23 +52,28 @@ function food(name, type, price, deliveryTime,order) {
             else console.log(this.price,this.totalFoodRate)
     },
         rateFood:function addRate(rateNum){
-            if (this.totalFoodRate===0) this.totalFoodRate=rateNum;
-            else this.totalFoodRate=(this.totalFoodRate+rateNum)/2
+            this.totalFoodRate.push(rateNum)
+            let sumRate=this.totalFoodRate.reduce((preVal,curVla)=>{
+                return preVal+curVla
+            })
+            return sumRate/(this.totalFoodRate.length)
         }
-}}
+        }
+}
 //-------------------------test factory method-------------------------
 let berger=food('berger','fast-food',45,15)
 // console.log(berger)
 
 //------------------------------add rate th berger------------------------
-let rateCustomer1=berger.rateFood(4)
+// console.log(berger.rateFood(4))
 // console.log(berger.totalFoodRate)
 
-let rateCustomer2=berger.rateFood(3)
+// console.log(berger.rateFood(3))
 // console.log(berger.totalFoodRate)
 
-let rateCustomer3=berger.rateFood(5)
+// console.log(berger.rateFood(5))
 // console.log(berger.totalFoodRate)
+
 
 //----------------------------test order part ----------------------
 // console.log(berger.order(true))
@@ -79,11 +84,15 @@ function addComment(author, text) {
     return{
         author,
         date:new Date(),
-        totalRate:0,
+        totalRate:[],
         text,
         rate:function SetRate(rateNum) {
-            if (this.totalRate === 0) this.totalRate = rateNum;
-            else this.totalRate = (this.totalRate + rateNum) / 2
+          this.totalRate.push(rateNum)
+            let sum=this.totalRate.reduce((preVal,curVal)=>
+            {
+                return preVal+curVal
+            })
+            return sum/this.totalRate.length
         }
     }
 
@@ -100,7 +109,9 @@ berger.comments.push(comment2)
 // console.log(berger)
 
 //-------------------------------------------add rate to comment------------------------
-let rateComment1=comment1.rate(5)
+// console.log(comment1.rate(5))
+// console.log(comment1.rate(3))
+// console.log(comment1.rate(2))
 // console.log(comment1.totalRate)
 // console.log(comment1)
 // console.log(pizza)
